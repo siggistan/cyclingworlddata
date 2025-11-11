@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Træningsoversigt</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f3f4f7; padding: 20px; }
+    h1 { color: #0d47a1; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+    th { background-color: #0d47a1; color: white; }
+    tr:hover { background-color: #f1f1f1; }
+    .flag { font-size: 1.4em; }
+  </style>
+</head>
+<body>
+  <h1>Seneste cykelture</h1>
+  <table id="rides">
+    <thead>
+      <tr>
+        <th>Rytter</th>
+        <th>Dato</th>
+        <th>Distance</th>
+        <th>Land</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function loadData() {
+      const response = await fetch('data.json');
+      const rides = await response.json();
+      const tbody = document.querySelector('#rides tbody');
+      const flags = { "Denmark":"🇩🇰","Spain":"🇪🇸","France":"🇫🇷","Italy":"🇮🇹" };
+      tbody.innerHTML = '';
+      rides.forEach(ride => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${ride.rider}</td>
+          <td>${ride.date}</td>
+          <td>${ride.distance} km</td>
+          <td class="flag">${flags[ride.country] || '🏳️'} ${ride.country}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+    loadData();
+  </script>
+</body>
+</html>

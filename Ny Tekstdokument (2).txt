@@ -1,0 +1,5 @@
+[
+  { "rider": "Jonas Vingegaard", "date": "2025-11-11", "distance": 145, "country": "Spain" },
+  { "rider": "Mads Pedersen", "date": "2025-11-10", "distance": 102, "country": "Denmark" },
+  { "rider": "Mattias Skjelmose", "date": "2025-11-09", "distance": 164, "country": "France" }
+]
